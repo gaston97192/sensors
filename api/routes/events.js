@@ -1,5 +1,6 @@
-
 const { Router } = require('express');
+const { validateJWT } = require('../helpers/validateToken');
+
 
 const { eventsGet,
         eventsSave,
@@ -8,10 +9,8 @@ const { eventsGet,
 const router = Router();
 
 
-router.get('/', eventsGet );
+router.get('/', [validateJWT], eventsGet );
 
-router.post('/', eventsSave );
-
-
+router.post('/', [validateJWT], eventsSave );
 
 module.exports = router;

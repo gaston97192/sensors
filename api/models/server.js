@@ -9,7 +9,7 @@ class Server {
         this.port = process.env.PORT;
         this.sensorsPath = '/api/sensors';
         this.eventsPath = '/api/events';
-
+        this.auth = '/api/auth';
 
         //Conectar a base de datos
         this.connectToDB();
@@ -35,6 +35,8 @@ class Server {
     routes() {
         this.app.use( this.sensorsPath, require('../routes/sensors'));
         this.app.use( this.eventsPath, require('../routes/events'));
+        this.app.use( this.auth, require('../routes/auth'));
+
     }
 
     listen() {
