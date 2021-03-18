@@ -4,11 +4,11 @@ const Sensor = require('../models/sensor')
 
 const sensorsGet = async(req = request, res = response) => {
 
-    const {limit = 5, since = 0} = req.query;
+    // const {limit = 5, since = 0} = req.query;
 
     const sensors = await Sensor.find()
-    .limit(Number(limit))
-    .skip(Number(since))
+    // .limit(Number(limit))
+    // .skip(Number(since))
 
     const total = await Sensor.countDocuments();
 
@@ -51,8 +51,6 @@ const sensorsDelete = async(req, res = response) => {
         data: sensor
     });
 }
-
-
 
 
 module.exports = {
