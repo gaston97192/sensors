@@ -18,12 +18,12 @@
     <tbody>
 
       <tr *ngIf="sensors.length <= 0 && !loading" class="text-center">
-        <td>No se obtuvieron resultados</td>
+        <td colspan="6">No se obtuvieron resultados</td>
       </tr>
 
       <tr *ngIf="loading" class="text-center">
         <td colspan="6">
-          <i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Loading...
+          <i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Cargando...
         </td>
       </tr>
 
@@ -58,7 +58,7 @@
       <div class="modal-body">
         <ul>
           <li *ngFor="let event of events"> <span><b>Valor: </b></span>{{event.value}}</li>
-
+          <li *ngIf="events.length <= 0">El sensor no tiene eventos asociados</li>
         </ul>
       </div>
     </div>

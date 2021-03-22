@@ -71,7 +71,12 @@ const sensorsUpdate = async(req, res = response) => {
 
 const sensorsDelete = async(req, res = response) => {
     const id = req.params.id;
-    const sensor = await Sensor.findByIdAndDelete( id )
+    const sensor = await Sensor.findByIdAndDelete( id );
+    const events = await Event.find({sensorId: id});
+
+    for (const event of events) {
+       await  Event.findByIdAndDelete(event._id)
+    }
 
     res.json({
         data: sensor
