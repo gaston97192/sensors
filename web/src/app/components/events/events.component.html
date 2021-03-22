@@ -1,47 +1,40 @@
 <div class="form-row mt-4">
-    <div class="col-12">
-        <h4 class="d-inline" >Lista de eventos</h4>
-        <button class="btn btn-success  float-right" routerLink="/events/create" ><i class="fa fa-plus" aria-hidden="true"></i> Crear</button>
-    </div>
+  <div class="col-12">
+      <h4 class="d-inline" >Lista de eventos</h4>
+      <button class="btn btn-success  float-right" routerLink="/events/create" ><i class="fa fa-plus" aria-hidden="true"></i> Crear</button>
+  </div>
 </div>
 
 <table class="table table-striped mt-5">
-    <thead>
-      <tr>
-        <th scope="col">Nombre</th>
-        <th scope="col">Sensor</th>
-        <th scope="col" ></th>
+  <thead>
+    <tr>
+      <th scope="col">Valor</th>
+      <th scope="col">Sensor</th>
+      <th scope="col" ></th>
+    </tr>
+  </thead>
+  <tbody>
 
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td class="float-right">
-            <button class="btn btn-info btn-sm mr-2">Ver eventos</button>
-            <button class="btn btn-secondary btn-sm mr-2" routerLink="/events/edit">Editar</button>
-            <button class="btn btn-danger btn-sm">Borrar</button>
-        </td>
-      </tr>
-      <tr>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td class="float-right">
-            <button class="btn btn-info btn-sm mr-2">Ver eventos</button>
-            <button class="btn btn-secondary btn-sm mr-2">Editar</button>
-            <button class="btn btn-danger btn-sm">Borrar</button>
-        </td>
-      </tr>
-      <tr>
-        <td>Larry</td>
-        <td>the Bird</td>
-        <td class="float-right"> 
-            <button class="btn btn-info btn-sm mr-2">Ver eventos</button>
-            <button class="btn btn-secondary btn-sm mr-2">Editar</button>
-            <button class="btn btn-danger btn-sm">Borrar</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-  <p class="float-right">Resultados:</p>
+    <tr *ngIf="events.length <= 0 && !loading" class="text-center">
+      <td>No se obtuvieron resultados</td>
+    </tr>
+
+    <tr *ngIf="loading" class="text-center">
+      <td colspan="6">
+        <i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Loading...
+      </td>
+    </tr>
+
+    <tr *ngFor="let item of events">
+      <td>{{item.value}}</td>
+      <td>{{item.sensorId.name}}</td>
+
+      <td class="float-right">
+          <button class="btn btn-secondary btn-sm mr-2" (click)="goToEdit(item._id)">Editar</button>
+          <button class="btn btn-danger btn-sm" (click)="delete(item._id)">Borrar</button>
+      </td>
+    </tr>
+
+  </tbody>
+</table>
+<p class="float-right">Resultados: {{events.length}}</p>

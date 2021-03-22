@@ -1,0 +1,20 @@
+
+#navbarSupportedContent ul li a:hover{
+    color: #d3160c;
+    transform: scale(1.2,1.2);
+}
+
+#navbarSupportedContent ul li a{
+    transition: all 200ms;
+}
+
+.active {
+    color: white;
+}
+
+
+.name {
+    font-family: "nevis";
+    letter-spacing: 4px;
+}
+

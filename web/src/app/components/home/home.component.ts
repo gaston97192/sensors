@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-home',
@@ -7,17 +9,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  token: boolean = false;
+  token: any = localStorage.getItem('token') || false;
 
-  constructor() { }
+  constructor( private authService: AuthService) { }
 
   ngOnInit(): void {
   }
 
+  
+
   generateToken() {
-    console.log('eeeeeeeeeeeee')
-    this.token = true;
-    console.log(this.token)
+    this.authService.login().subscribe(
+      (resp:any) => {
+        this.token = resp.data;
+        localStorage.setItem('token', this.token)
+        Swal.fire('Exito', 'Token generado exitosamente','success')
+      },
+      (error) =>{
+        Swal.fire('Error', 'Ocurrio un error','error')
+        console.log(error)
+      }
+    )
   }
 
 }
